@@ -66,7 +66,7 @@ erDiagram
 
     %% Weak Entity
     LAPORAN_UPDATE {
-        int nomor_sekuensial Partial_Key
+        int nomor_sekuensial PK
         string judul_update
         text deskripsi_penggunaan
         string lampiran_bukti_Multi
@@ -74,15 +74,13 @@ erDiagram
     }
 
     %% Relasi Spesialisasi
-    PENGGUNA ||--o| DONATUR : "is-a (Overlap)"
-    PENGGUNA ||--o| INISIATOR : "is-a (Overlap)"
-    KAMPANYE ||--o| KAMPANYE_BENCANA_ALAM : "is-a (Disjoint)"
-    KAMPANYE ||--o| KAMPANYE_SOSIAL_MEDIS : "is-a (Disjoint)"
+    PENGGUNA ||--o{ DONATUR : "is-a Overlap"
+    PENGGUNA ||--o{ INISIATOR : "is-a Overlap"
+    KAMPANYE ||--o{ KAMPANYE_BENCANA_ALAM : "is-a Disjoint"
+    KAMPANYE ||--o{ KAMPANYE_SOSIAL_MEDIS : "is-a Disjoint"
 
     %% Relasi Operasional
-    INISIATOR ||--o{ KAMPANYE : "mengelola"
-    DONATUR ||--o{ TRANSAKSI_DONASI : "melakukan"
-    KAMPANYE ||--o{ TRANSAKSI_DONASI : "menerima_inflow"
+    INISIATOR ||--o{ LAPORAN_UPDATE : "memiliki Identifying"
     
     INISIATOR ||--o{ PENCAIRAN_DANA : "mengajukan"
     KAMPANYE ||--o{ PENCAIRAN_DANA : "sumber_outflow"
